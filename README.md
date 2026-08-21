@@ -38,7 +38,7 @@ Windows 浮动 Dock 托盘 —— 一个轻量、可定制的桌面快捷启动�
 
 前往 [Releases](../../releases) 下载：
 
-- `FloatingDock-Setup-x.y.z.exe` —— **安装包**（自解压安装到 `%LOCALAPPDATA%\Programs\FloatingDock`，无需管理员权限，带开始菜单快捷方式和卸载入口）
+- `FloatingDock-Setup-x.y.z.exe` —— **安装包**（图形向导，可自选安装目录，默认 `%LOCALAPPDATA%\Programs\FloatingDock`；无需管理员权限，带开始菜单快捷方式和卸载入口；也支持静默安装 `-Silent -InstallDir "D:\xxx"`）
 - `FloatingDock-portable-win-x64.zip` —— **绿色便携版**（解压即用）
 
 系统要求：Windows 10 / 11 x64（自包含 .NET 运行时，无需另装 .NET）。
