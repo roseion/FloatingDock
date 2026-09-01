@@ -1,4 +1,4 @@
-# FloatingDock 安装脚本（由自解压安装包调用）
+﻿# FloatingDock 安装脚本（由自解压安装包调用）
 # 支持图形界面选择安装目录（默认 %LOCALAPPDATA%\Programs\FloatingDock），无需管理员权限
 # 静默模式: install.ps1 -Silent [-InstallDir "D:\xxx"]
 param(
