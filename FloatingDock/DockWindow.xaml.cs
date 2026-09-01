@@ -283,6 +283,10 @@ namespace FloatingDock
                     NameSeparator.Background = new SolidColorBrush(Color.FromArgb((byte)Math.Max(48, lc.A * 3 / 10), lc.R, lc.G, lc.B));
                 }
                 catch { }
+
+                // 图标名称标签同样跟随主题文字色
+                foreach (UIElement child in ItemsPanel.Children)
+                    if (child is DockItemControl ic) ic.LabelColor = _theme.LabelColor;
             }
             catch { }
         }
@@ -440,7 +444,8 @@ namespace FloatingDock
                 VerticalAlignment = VerticalAlignment.Bottom,
                 IconSize = _config.IconSize,
                 ShowLabel = _config.ShowLabels,
-                ItemFontFamily = _config.FontFamily ?? "Segoe UI"
+                ItemFontFamily = _config.FontFamily ?? "Segoe UI",
+                LabelColor = _theme.LabelColor
             };
 
             // 根据方向设置间距

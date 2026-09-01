@@ -45,7 +45,7 @@ namespace FloatingDock.Services
                 CornerRadius = 24,
                 PaddingX = 14, PaddingY = 10,
                 IconSize = 48, ItemSpacing = 8,
-                LabelColor = "#F0FFFFFF", FontSize = 10,
+                LabelColor = "#B04A5058", FontSize = 10,
                 HoverScale = 1.25, NeighborScale = 1.08,
                 ShadowType = "none"
             },

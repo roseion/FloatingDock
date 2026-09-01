@@ -35,6 +35,10 @@ namespace FloatingDock.Controls
             DependencyProperty.Register(nameof(ItemFontFamily), typeof(string), typeof(DockItemControl),
                 new PropertyMetadata("Segoe UI"));
 
+        public static readonly DependencyProperty LabelColorProperty =
+            DependencyProperty.Register(nameof(LabelColor), typeof(string), typeof(DockItemControl),
+                new PropertyMetadata("#B0FFFFFF", OnLabelColorChanged));
+
         public ImageSource? IconSource
         {
             get => (ImageSource?)GetValue(IconSourceProperty);
@@ -75,6 +79,24 @@ namespace FloatingDock.Controls
         {
             get => (string)GetValue(ItemFontFamilyProperty);
             set => SetValue(ItemFontFamilyProperty, value);
+        }
+
+        public string LabelColor
+        {
+            get => (string)GetValue(LabelColorProperty);
+            set => SetValue(LabelColorProperty, value);
+        }
+
+        private static void OnLabelColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DockItemControl c && c.NameLabel != null)
+                c.NameLabel.Foreground = CreateLabelBrush(e.NewValue as string);
+        }
+
+        private static Brush CreateLabelBrush(string? hex)
+        {
+            try { return new SolidColorBrush((Color)ColorConverter.ConvertFromString(hex ?? "#B0FFFFFF")); }
+            catch { return Brushes.White; }
         }
 
         public event EventHandler<RoutedEventArgs>? ItemRemoved;
