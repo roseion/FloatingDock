@@ -100,9 +100,9 @@ try {
     Get-Process -Name 'FloatingDock' -ErrorAction SilentlyContinue | Stop-Process -Force
     Start-Sleep -Milliseconds 500
 
-    # 3. 复制程序文件
+    # 3. 复制程序文件（目录部署：单文件包的自解压行为在部分机器上会被常驻软件干扰致崩）
     New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-    Copy-Item -Path (Join-Path $sourceDir $exeName) -Destination $installDir -Force
+    Copy-Item -Path (Join-Path $sourceDir '*') -Destination $installDir -Recurse -Force -Exclude 'install.ps1'
     $exePath = Join-Path $installDir $exeName
 
     # 4. 开始菜单快捷方式
