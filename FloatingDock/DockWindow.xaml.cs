@@ -192,7 +192,8 @@ namespace FloatingDock
 
                 // 圆角: 用户配置优先，0=直角，>0=自定义值
                 DockBorder.CornerRadius = new CornerRadius(cr);
-                DockBorder.Padding = new Thickness(_theme.PaddingX, _theme.PaddingY, _theme.PaddingX, _theme.PaddingY);
+                double px = _theme.PaddingX, py = _theme.PaddingY;
+                DockBorder.Padding = new Thickness(px, py, px, py);
 
                 if (_theme.BorderThickness > 0 && _theme.BorderColor != "Transparent")
                 {
@@ -224,7 +225,8 @@ namespace FloatingDock
                     gb.GradientStops.Add(new GradientStop(Color.FromArgb(0, 255, 255, 255), 0.5));
                     GlossOverlay.Background = gb;
                     GlossOverlay.CornerRadius = new CornerRadius(Math.Max(0, cr - 1));
-                    GlossOverlay.Margin = new Thickness(1);
+                    // 负Margin抵消Padding，让光泽覆盖整个DockBorder，避免padding环带与内容区出现色差矩形
+                    GlossOverlay.Margin = new Thickness(1 - px, 1 - py, 1 - px, 1 - py);
                     GlossOverlay.Visibility = Visibility.Visible;
                 }
                 else GlossOverlay.Visibility = Visibility.Collapsed;
@@ -243,7 +245,7 @@ namespace FloatingDock
                     BevelOverlay.BorderBrush = bb;
                     BevelOverlay.BorderThickness = new Thickness(2);
                     BevelOverlay.CornerRadius = new CornerRadius(Math.Max(0, cr - 1));
-                    BevelOverlay.Margin = new Thickness(1);
+                    BevelOverlay.Margin = new Thickness(1 - px, 1 - py, 1 - px, 1 - py);
                     BevelOverlay.Visibility = Visibility.Visible;
                 }
                 else BevelOverlay.Visibility = Visibility.Collapsed;
@@ -264,6 +266,7 @@ namespace FloatingDock
                     };
                     TextureOverlay.Background = texBrush;
                     TextureOverlay.CornerRadius = new CornerRadius(cr);
+                    TextureOverlay.Margin = new Thickness(-px, -py, -px, -py);
                     TextureOverlay.Visibility = Visibility.Visible;
                 }
                 else TextureOverlay.Visibility = Visibility.Collapsed;
