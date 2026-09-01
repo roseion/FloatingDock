@@ -274,6 +274,15 @@ namespace FloatingDock
                 DropOverlay.CornerRadius = new CornerRadius(cr + spread);
                 DropOverlay.Margin = new Thickness(-spread);
                 EmptyHint.Foreground = CreateBrush(_theme.LabelColor);
+
+                // 托盘标题/分隔线跟随主题文字色（浅色主题自动用深色字，保证可读性）
+                DockNameLabel.Foreground = CreateBrush(_theme.LabelColor);
+                try
+                {
+                    var lc = (Color)ColorConverter.ConvertFromString(_theme.LabelColor);
+                    NameSeparator.Background = new SolidColorBrush(Color.FromArgb((byte)Math.Max(48, lc.A * 3 / 10), lc.R, lc.G, lc.B));
+                }
+                catch { }
             }
             catch { }
         }
