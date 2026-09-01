@@ -63,12 +63,14 @@ function Show-InstallDialog {
     $btnInstall.Text = '安装'
     $btnInstall.Location = New-Object System.Drawing.Point(324, 156)
     $btnInstall.Size = New-Object System.Drawing.Size(88, 30)
+    $btnInstall.DialogResult = [System.Windows.Forms.DialogResult]::OK
     $form.AcceptButton = $btnInstall
 
     $btnCancel = New-Object System.Windows.Forms.Button
     $btnCancel.Text = '取消'
     $btnCancel.Location = New-Object System.Drawing.Point(420, 156)
     $btnCancel.Size = New-Object System.Drawing.Size(84, 30)
+    $btnCancel.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
     $form.CancelButton = $btnCancel
 
     $form.Controls.AddRange(@($lblTitle, $lblDir, $txtDir, $btnBrowse, $chkLaunch, $btnInstall, $btnCancel))
@@ -83,6 +85,7 @@ try {
     # 1. 确定安装目录
     if ($Silent) {
         if ($InstallDir) { $installDir = $InstallDir } else { $installDir = $defaultDir }
+        $launchApp = $false
     }
     else {
         if (-not (Show-InstallDialog)) {
